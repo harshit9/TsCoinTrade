@@ -1,25 +1,72 @@
-import BitcoinHalvingCountdown from '../components/BitcoinHalvingCountdown'
-import FearGreedIndex from '../components/FearGreedIndex'
-import CryptoTable from '../components/CryptoTable'
-
+import { Box,  Flex } from "@chakra-ui/react";
+import BitcoinHalvingCountdown from '../components/BitcoinHalvingCountdown';
+import FearGreedIndex from '../components/FearGreedIndex';
+import CryptoTable from '../components/CryptoTable';
 
 const Home = () => {
   return (
-    <div>
-        <div className="flex flex-col items-center">
-            <div className = "grid grid-cols-2 w-9/12 gap-5 h-full my-8">
-                <div className='bg-[#1F2D37]/[0.5] border border-white/[0.2] rounded-md shadow-black/60 shadow-inner'>
-                  <BitcoinHalvingCountdown />
-                </div>
-                <div className='bg-[#1F2D37]/[0.5] border border-white/[0.2] rounded-md shadow-black/60 shadow-inner'>
-                 <FearGreedIndex />
-                </div>
-            </div>
-            <CryptoTable />
-        </div>
-    </div>
-  )
-}
+    <Box >
+      <Flex direction="column" align="center" justify="center" w="full" p={0} >
+        <Flex
+          direction="row"
+          w="80%"
+          maxW="80%"
+          gap={5}
+          justify="space-between"
+          mb={8}
+          sx={{
+            ".css-14nfm56, .css-h94677": {
+              padding: 0, // Remove padding
+              margin: 0,  // Remove margin
+            },
+          }}
+        >
+          {/* Bitcoin Halving Countdown */}
+          <Box
+            bg="#1F2D37"
+            border="1px solid"
+            borderColor="whiteAlpha.200"
+            borderRadius="md"
+            boxShadow="inset 0 0 10px rgba(0, 0, 0, 0.5)"
+            p={4}
+            flex="1"
+            display="flex"
+            alignItems="stretch"
+          >
+            <BitcoinHalvingCountdown />
+          </Box>
 
+          {/* Fear & Greed Index */}
+          <Box
+            bg="#1F2D37"
+            border="1px solid"
+            borderColor="whiteAlpha.200"
+            borderRadius="md"
+            boxShadow="inset 0 0 10px rgba(0, 0, 0, 0.5)"
+            p={4}
+            flex="1"
+            display="flex"
+            alignItems="stretch"
+          >
+            <FearGreedIndex />
+          </Box>
+        </Flex>
 
-export default Home
+        {/* Crypto Table */}
+        <Flex
+          w="80%"
+          align="center"
+          justify="center"
+          borderRadius="md"
+          boxShadow="inset 0 0 10px rgba(0, 0, 0, 0.5)"
+          p={0} // Remove any extra padding
+          textAlign="center" // Center the table within the container
+        >
+          <CryptoTable />
+        </Flex>
+      </Flex>
+    </Box>
+  );
+};
+
+export default Home;

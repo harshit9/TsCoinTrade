@@ -1,36 +1,44 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { Flex, Box, Select, Button } from "@chakra-ui/react";
 
 const NavBar1 = () => {
-
-  // const [darkTheme, setTheme] = useState<boolean>(True);
   return (
-    <div className="flex items-center justify-between 
-                    border-b-[0.69px] border-white/[0.90] 
-                    pt-1 pb-2 text-[18px]">
+    <Flex
+      align="center"
+      justify="space-between"
+      borderBottom="1px solid"
+      borderColor="whiteAlpha.900"
+      py={2}
+      px={4}
+      bg="#05010D"
+      color="whiteAlpha.900"
+    >
+      <Flex align="center" gap={8} fontWeight="bold">
+        <Box fontSize="2xl" color="blue.400">
+          <Link to="/">CoinTrade</Link>
+        </Box>
+        <Link to="/Trending">Trending</Link>
+        <Link to="/Heatmap">Heatmap</Link>
+        <Link to="/Watchlist">Watchlist</Link>
+      </Flex>
 
-      <div className="flex gap-20 col-span-8 ml-10 items-center font-bold">
-        <p className="text-blue-400 text-2xl mr-10"><Link to = "/">CoinTrade</Link></p>
-        <div><Link to = "/Trending">Trending</Link></div>
-        <div><Link to = "/Heatmap">Heatmap</Link></div>
-        <div><Link to = "/Watchlist">Watchlist</Link></div>
-      </div>
-      
+      <Flex align="center" gap={4}>
+        <Box>
+          <Select
+            variant="unstyled"
+            bg="inherit"
+            color="whiteAlpha.900"
+            borderColor="whiteAlpha.300"
+          >
+            <option value="USD">USD</option>
+            <option value="INR">INR</option>
+            <option value="EURO">EURO</option>
+          </Select>
+        </Box>
+        <Button colorScheme="blue">icon</Button>
+      </Flex>
+    </Flex>
+  );
+};
 
-      <div className="flex gap-10">
-        <div>
-          <label htmlFor="dropdown">Currency :</label>
-          <select id="dropdown" className="bg-inherit"> 
-          {/* value={selectedCurrency} onChange={handleCurrencyChange} */}
-            <option value="" className="text-white/[.90] bg-[#05010D]">USD</option>
-            <option value="option1" className="text-white/[.90] bg-[#05010D]">INR</option>
-            <option value="option2" className="text-white/[.90] bg-[#05010D]">USD</option>
-            <option value="option3" className="text-white/[.90] bg-[#05010D]">EURO</option>
-          </select>
-        </div>
-        <button className="mr-10">icon</button>
-        </div>
-    </div>
-  )
-}
-
-export default NavBar1
+export default NavBar1;

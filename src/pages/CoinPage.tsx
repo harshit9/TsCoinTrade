@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import { Box, Flex, Image, Heading, Text, Spinner, useBreakpointValue } from "@chakra-ui/react";
 
 interface CoinData {
   image: { small: string };
@@ -20,31 +21,45 @@ const CoinPage: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
-        console.log(response);
         setCoinData(response.data);
         setLoading(false);
-        console.log(coinData);
       } catch (error) {
         console.error('Error fetching crypto data:', error);
       }
     };
     fetchData();
-  }, [url, coinData]); 
+  }, [url]);
+
+  const descriptionProps = useBreakpointValue({
+    base: { fontSize: 'sm' },
+    md: { fontSize: 'md' },
+  });
 
   if (loading) {
-    return <div className="text-center">Loading...</div>;
+    return (
+      <Flex justify="center" align="center" height="100vh">
+        <Spinner size="lg" />
+      </Flex>
+    );
   }
 
   if (!coinData) return null;
 
   return (
-    <div className='mt-6 mx-auto flex-col w-[80%] items-center'>
-      <div className='flex gap-2 items-center'>
-        <img src={coinData.image.small} alt={coinData.name} />
-        <h1 className='text-2xl my-2 capitalize font-bold'>{coinData.name}</h1>
-      </div>
-      <p className='mt-6 text-gray-500 [&>a]:text-blue-600 [&>a]:underline' dangerouslySetInnerHTML={{ __html: coinData.description.en }}></p>
-    </div>
+    <Box mt={6} mx="auto" maxW="container.md" p={4}>
+      <Flex gap={4} align="center" mb={6}>
+        <Image src={coinData.image.small} alt={coinData.name} boxSize="100px" />
+        <Heading size="lg" my={2} textTransform="capitalize">
+          {coinData.name}
+        </Heading>
+      </Flex>
+      <Text
+        mt={6}
+        color="gray.600"
+        dangerouslySetInnerHTML={{ __html: coinData.description.en }}
+        {...descriptionProps}
+      />
+    </Box>
   );
 }
 
